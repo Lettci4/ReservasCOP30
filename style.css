@@ -1,3 +1,13 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+}
+
+.banner {
+  height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+              url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
+}
 
 form input, form button {
   border-radius: 8px;
@@ -28,4 +38,9 @@ form input, form button {
   .hotel-card img {
     height: 180px;
   }
+}
+
+.ratio {
+  border-radius: 15px;
+  overflow: hidden;
 }
