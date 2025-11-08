@@ -1,10 +1,31 @@
-body {
-  font-family: 'Poppins', sans-serif;
-  scroll-behavior: smooth;
+
+form input, form button {
+  border-radius: 8px;
 }
 
-.banner {
-  height: 100vh;
-  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-              url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') center/cover no-repeat;
+
+.hotel-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  border-radius: 15px;
+}
+
+.hotel-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
+
+.hotel-card img {
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  height: 220px;
+  object-fit: cover;
+}
+
+
+@media (max-width: 768px) {
+  .hotel-card img {
+    height: 180px;
+  }
 }
