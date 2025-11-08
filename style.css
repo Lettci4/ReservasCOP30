@@ -6,7 +6,7 @@ body {
 .banner {
   height: 100vh;
   background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
-              url('imagem/ver\ o\ peso.jpg') center/cover no-repeat;
+              url('imagem/doca.jpg') center/cover no-repeat;
 }
 
 form input, form button {
