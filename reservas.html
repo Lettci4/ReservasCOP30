@@ -26,15 +26,15 @@
   <div class="container">
     <h2 class="text-success text-center mb-4">Encontre o hotel ideal para a COP 30</h2>
 
-    <form class="row g-3 justify-content-center">
+    <form id="buscarForm" class="row g-3 justify-content-center">
       <div class="col-md-3">
-        <label class="form-label"><i class="bi bi-geo-alt"></i> Localização</label>
-        <input type="text" class="form-control" placeholder="Ex: Belém, Ananindeua...">
+        <label class="form-label">Localização</label>
+        <input type="text" id="buscarLocal" class="form-control" placeholder="Ex: Belém, Ananindeua...">
       </div>
 
       <div class="col-md-2">
-        <label class="form-label"><i class="bi bi-currency-dollar"></i> Preço Máximo</label>
-        <input type="number" class="form-control" placeholder="R$">
+        <label class="form-label">Preço Máximo</label>
+        <input type="number" id="buscarPreco" class="form-control" placeholder="R$">
       </div>
 
       <div class="col-md-2">
@@ -48,11 +48,10 @@
       </div>
 
       <div class="col-md-2 d-flex align-items-end">
-        <button type="submit" class="btn btn-success w-100">
-          <i class="bi bi-search"></i> Buscar
-        </button>
+        <button type="submit" class="btn btn-success w-100">Buscar</button>
       </div>
     </form>
+    <div id="contador" class="text-center mt-3 text-success fw-bold"></div>
   </div>
 </section>
 <section class="py-5">
@@ -60,7 +59,7 @@
     <h3 class="text-center text-success mb-4">Hotéis disponíveis</h3>
     <div class="row g-4">
       <div class="col-md-4 d-flex">
-        <div class="card hotel-card h-100 d-flex flex-column">
+        <div class="card hotel-card" data-local="Belém" data-preco="450">
           <img src="imagem/64fcfe399c701942391c8a8c4aa5969b-1920w.webp" class="card-img-top" alt="Hotel 1">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title text-success">Hotel Sagres</h5>
@@ -73,7 +72,7 @@
         </div>
       </div>
       <div class="col-md-4 d-flex">
-        <div class="card hotel-card h-100 d-flex flex-column w-100">
+        <div class="card hotel-card" data-local="Belém" data-preco="580">
           <img src="imagem/radissson hotel belem.jpeg" class="card-img-top" alt="Hotel 2">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title text-success">Radisson Hotel Belém</h5>
@@ -84,7 +83,7 @@
         </div>
       </div>
       <div class="col-md-4 d-flex">
-        <div class="card hotel-card h-100 d-flex flex-column">
+        <div class="card hotel-card" data-local="Ilha da Combú" data-preco="390">
           <img src="imagem/olaria river hostel.jpg" class="card-img-top" alt="Hotel 3">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title text-success">Olaria River Hostel</h5>
@@ -97,7 +96,7 @@
         </div>
       </div>
       <div class="col-md-4 d-flex">
-        <div class="card hotel-card h-100 d-flex flex-column">
+        <div class="card hotel-card" data-local="Belém" data-preco="700">
           <img src="imagem/entrada-do-hotel princesa louça.jpg" class="card-img-top" alt="Hotel 4">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title text-success">Hotel Princesa Louçã</h5>
@@ -110,7 +109,7 @@
         </div>
       </div>
       <div class="col-md-4 d-flex">
-        <div class="card hotel-card h-100 d-flex flex-column">
+        <div class="card hotel-card" data-local="Belém" data-preco="500">
           <img src="imagem/hotel-ipe.jpg" class="card-img-top" alt="Hotel 5">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title text-success">Hotel Ipê</h5>
@@ -123,7 +122,7 @@
         </div>
       </div>
       <div class="col-md-4 d-flex">
-        <div class="card hotel-card h-100 d-flex flex-column w-100">
+        <div class="card hotel-card" data-local="Belém" data-preco="650">
           <img src="imagem/ibis hangar.jpg" class="card-img-top" alt="Hotel 6">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title text-success">Ibis Styles Belém Hangar</h5>
@@ -134,7 +133,7 @@
         </div>
       </div>
       <div class="col-md-4 d-flex">
-        <div class="card hotel-card h-100 d-flex flex-column w-100">
+        <div class="card hotel-card" data-local="Belém" data-preco="480">
           <img src="imagem/ibis aeroporto.jpg" class="card-img-top" alt="Hotel 7">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title text-success">Ibis Belém Aeroporto</h5>
@@ -145,7 +144,7 @@
         </div>
       </div>
       <div class="col-md-4 d-flex">
-        <div class="card hotel-card h-100 d-flex flex-column">
+        <div class="card hotel-card" data-local="Ananindeua" data-preco="650">
           <img src="imagem/express hotel belem ananindeua.jpg" class="card-img-top" alt="Hotel 8">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title text-success">Holiday Inn Express</h5>
@@ -158,7 +157,7 @@
         </div>
       </div>
       <div class="col-md-4 d-flex">
-        <div class="card hotel-card h-100 d-flex flex-column w-100">
+        <div class="card hotel-card" data-local="Belém" data-preco="850">
           <img src="imagem/mercure boulevard belem.jpg" class="card-img-top" alt="Hotel 9">
           <div class="card-body d-flex flex-column">
             <h5 class="card-title text-success">Mercure Belém Boulevard</h5>
@@ -193,5 +192,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="script.js"></script>
 </body>
 </html>

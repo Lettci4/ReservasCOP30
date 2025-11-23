@@ -1,13 +1,37 @@
-document.getElementById("reservaForm").addEventListener("submit", function(event) {
-  event.preventDefault();
+const localInput = document.querySelector("#buscarLocal");
+const precoInput = document.querySelector("#buscarPreco");
+const form = document.querySelector("#buscarForm");
 
-  const nome = document.getElementById("nome").value;
-  const data = document.getElementById("data").value;
-  
-  const mensagem = document.getElementById("mensagem");
-  mensagem.innerHTML = `<div class="alert alert-success">
-    Obrigado, ${nome}! Sua reserva para ${data} foi confirmada com sucesso.
-  </div>`;
+const cards = document.querySelectorAll(".hotel-card");
 
-  this.reset();
+form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const local = localInput.value.toLowerCase();
+    const preco = precoInput.value;
+
+    let total = 0;
+
+    cards.forEach(card => {
+        const cardLocal = card.dataset.local.toLowerCase();
+        const cardPreco = Number(card.dataset.preco);
+        const coluna = card.closest(".col-md-4");
+
+        let match = true;
+
+        if (local && !cardLocal.includes(local)) match = false;
+        if (preco && cardPreco > preco) match = false;
+
+        if (match) {
+            coluna.style.display = "block";
+            total++;
+        } else {
+            coluna.style.display = "none";
+        }
+    });
+
+    const mensagem = document.querySelector("#contador");
+    if (mensagem) {
+        mensagem.innerHTML = ` ${total} hotel(is) encontrado(s).`;
+    }
 });
