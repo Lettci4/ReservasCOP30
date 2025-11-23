@@ -32,6 +32,9 @@ form input, form button {
   height: 220px;
   object-fit: cover;
 }
+.col-md-4 {
+    display: flex !important;
+}
 
 
 @media (max-width: 768px) {

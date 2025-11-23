@@ -1,37 +1,32 @@
-const localInput = document.querySelector("#buscarLocal");
-const precoInput = document.querySelector("#buscarPreco");
-const form = document.querySelector("#buscarForm");
-
-const cards = document.querySelectorAll(".hotel-card");
-
-form.addEventListener("submit", (event) => {
+document.getElementById("buscarForm").addEventListener("submit", function(event) {
     event.preventDefault();
 
-    const local = localInput.value.toLowerCase();
-    const preco = precoInput.value;
+    const normalizar = (texto) =>
+        texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-    let total = 0;
+    const local = normalizar(document.getElementById("buscarLocal").value);
+    const precoMax = document.getElementById("buscarPreco").value;
+    const colunas = document.querySelectorAll(".col-md-4");
+    const contador = document.getElementById("contador");
 
-    cards.forEach(card => {
-        const cardLocal = card.dataset.local.toLowerCase();
-        const cardPreco = Number(card.dataset.preco);
-        const coluna = card.closest(".col-md-4");
+    let encontrados = 0;
 
-        let match = true;
+    colunas.forEach(col => {
+        const card = col.querySelector(".hotel-card");
 
-        if (local && !cardLocal.includes(local)) match = false;
-        if (preco && cardPreco > preco) match = false;
+        const cardLocal = normalizar(card.getAttribute("data-local"));
+        const cardPreco = Number(card.getAttribute("data-preco"));
 
-        if (match) {
-            coluna.style.display = "block";
-            total++;
+        const okLocal = !local || cardLocal.includes(local);
+        const okPreco = !precoMax || cardPreco <= precoMax;
+
+        if (okLocal && okPreco) {
+            col.style.display = "";
+            encontrados++;
         } else {
-            coluna.style.display = "none";
+            col.style.display = "none";
         }
     });
 
-    const mensagem = document.querySelector("#contador");
-    if (mensagem) {
-        mensagem.innerHTML = ` ${total} hotel(is) encontrado(s).`;
-    }
+    contador.innerHTML = `${encontrados} hotel(is) encontrado(s)`;
 });
