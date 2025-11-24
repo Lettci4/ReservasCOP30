@@ -1,32 +1,41 @@
-document.getElementById("buscarForm").addEventListener("submit", function(event) {
-    event.preventDefault();
-
-    const normalizar = (texto) =>
-        texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-
-    const local = normalizar(document.getElementById("buscarLocal").value);
-    const precoMax = document.getElementById("buscarPreco").value;
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.getElementById("buscarForm");
+    const inputLocal = document.getElementById("buscarLocal");
+    const inputPreco = document.getElementById("buscarPreco");
     const colunas = document.querySelectorAll(".col-md-4");
     const contador = document.getElementById("contador");
 
-    let encontrados = 0;
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
 
-    colunas.forEach(col => {
-        const card = col.querySelector(".hotel-card");
+        const normalizar = (texto) =>
+            texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-        const cardLocal = normalizar(card.getAttribute("data-local"));
-        const cardPreco = Number(card.getAttribute("data-preco"));
+        const local = normalizar(inputLocal.value.trim());
+        const precoMax = inputPreco.value.trim() ? Number(inputPreco.value) : null;
 
-        const okLocal = !local || cardLocal.includes(local);
-        const okPreco = !precoMax || cardPreco <= precoMax;
+        let encontrados = 0;
 
-        if (okLocal && okPreco) {
-            col.style.display = "";
-            encontrados++;
-        } else {
-            col.style.display = "none";
-        }
+        colunas.forEach(col => {
+            const card = col.querySelector(".hotel-card");
+            if (!card) return;
+
+            const cardLocal = normalizar(card.getAttribute("data-local"));
+            const cardPreco = Number(card.getAttribute("data-preco"));
+
+            const okLocal = !local || cardLocal.includes(local);
+            const okPreco = !precoMax || cardPreco <= precoMax;
+
+            if (okLocal && okPreco) {
+                col.style.display = "flex";
+                encontrados++;
+            } else {
+                col.style.display = "none";
+            }
+        });
+
+        contador.textContent = encontrados === 0
+            ? "Nenhum hotel encontrado"
+            : `${encontrados} ${encontrados === 1 ? "hotel encontrado" : "hotéis encontrados"}`;
     });
-
-    contador.innerHTML = `${encontrados} hotel(is) encontrado(s)`;
 });
