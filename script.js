@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("buscarForm");
     const inputLocal = document.getElementById("buscarLocal");
     const inputPreco = document.getElementById("buscarPreco");
-    const colunas = document.querySelectorAll(".col-md-4");
+    const colunas = document.querySelectorAll(".hotel-card");
     const contador = document.getElementById("contador");
 
     form.addEventListener("submit", function(event) {
@@ -16,9 +16,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let encontrados = 0;
 
-        colunas.forEach(col => {
-            const card = col.querySelector(".hotel-card");
-            if (!card) return;
+        colunas.forEach(card => {
+
+            const col = card.closest(".col-md-4");
+            if (!col) return;
 
             const cardLocal = normalizar(card.getAttribute("data-local"));
             const cardPreco = Number(card.getAttribute("data-preco"));
@@ -27,15 +28,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const okPreco = !precoMax || cardPreco <= precoMax;
 
             if (okLocal && okPreco) {
-                col.style.display = "flex";
+                col.classList.remove("d-none");
                 encontrados++;
             } else {
-                col.style.display = "none";
+                col.classList.add("d-none");
             }
         });
 
-        contador.textContent = encontrados === 0
-            ? "Nenhum hotel encontrado"
-            : `${encontrados} ${encontrados === 1 ? "hotel encontrado" : "hotéis encontrados"}`;
+        contador.textContent =
+            encontrados === 0
+                ? "Nenhum hotel encontrado"
+                : `${encontrados} ${encontrados === 1 ? "hotel encontrado" : "hotéis encontrados"}`;
     });
 });
