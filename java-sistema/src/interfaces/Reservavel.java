@@ -1,5 +1,5 @@
 package interfaces;
 
-public class Reservavel {
-    
+public interface Reservavel {
+    double calcularValor();
 }
