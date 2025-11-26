@@ -1,11 +1,10 @@
 package telas;
 
-import modelos.Reserva;
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
+import modelos.Reserva;
 
 public class TelaConfirmacao extends JFrame {
-
     public TelaConfirmacao(Reserva reserva) {
         setTitle("Reserva Confirmada");
         setSize(450, 350);
@@ -26,5 +25,5 @@ public class TelaConfirmacao extends JFrame {
         add(voltar, BorderLayout.SOUTH);
 
         setVisible(true);
-    }
+    }
 }

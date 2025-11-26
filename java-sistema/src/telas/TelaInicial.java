@@ -2,9 +2,8 @@ package telas;
 
 import javax.swing.*;
 
-public class TelaInicial extends JFrame {
-
-     public TelaInicial() {
+public class TelaInicial extends JFrame { 
+    public TelaInicial() {
         setTitle("COP 30 - Reservas");
         setSize(400, 300);
         setLocationRelativeTo(null);
