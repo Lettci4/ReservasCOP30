@@ -63,5 +63,5 @@ public class TelaReserva extends JFrame {
         });
 
         setVisible(true);
-    }
+}
 }
